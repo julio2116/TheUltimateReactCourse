@@ -1,12 +1,13 @@
-const Item = ({ item }) => {
+const Item = ({ item, onDeleteItem }) => {
   return (
     <>
       <li>
-        <span style={item.packed ? {} : { textDecoration: "line-through" }}>
+        <input type="checkbox" />
+        <span style={item.packed ? { textDecoration: "line-through" } : {}}>
           {item.quantity} {item.description}
         </span>
-
-        <button>❌</button>
+        {console.log(item.id)}
+        <button onClick={()=>onDeleteItem(item.id)}>❌</button>
       </li>
     </>
   );
