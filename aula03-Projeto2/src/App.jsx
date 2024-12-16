@@ -14,12 +14,19 @@ function App() {
   function handleDeleteItem(id){
     setItems((items)=>items.filter((item)=>item.id !== id))
   }
+  function handleToggleItem(id){
+    setItems(items.map(item=>item.id === id ? {...item, packed: !item.packed} : item))
+  }
+  function handleClearList(){
+    const deleteItems = window.confirm ('Are you sureyou want to delete all items?');
+    if(deleteItems) setItems([])
+  }
   return (
     <>
       <Logo />
       <Form onAddItems={handleAddItems}/>
-      <PackingList items={items} onDeleteItem={handleDeleteItem}/>
-      <Stats />
+      <PackingList items={items} onDeleteItem={handleDeleteItem} onToggleItem={handleToggleItem} onClearList={handleClearList}/>
+      <Stats items={items}/>
     </>
   );
 }
