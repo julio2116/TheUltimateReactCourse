@@ -1,8 +1,9 @@
 import Button from './Button.jsx'
-const Friend = ({friend}) => {
+const Friend = ({friend, onSelection, selectedFriend}) => {
+    const isSelected = friend.id === selectedFriend?.id;
     return(
         <>
-            <li>
+            <li className={isSelected ? 'selected' : ''}>
                 <img src={friend.image} alt={friend.name} />
                 <div>
                 <h3>{friend.name}</h3>
@@ -12,7 +13,7 @@ const Friend = ({friend}) => {
                 : `You and ${friend.name} are even`}
                 </div>
                 </div>
-                <Button className="button">Select</Button>
+                <Button onClick={()=>onSelection(isSelected ? null : friend)} className="button">{isSelected ? 'Close' : 'Select'}</Button>
             </li>
         </>
     )

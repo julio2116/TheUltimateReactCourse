@@ -28,8 +28,12 @@ import { useState } from 'react'
 
 function App() {
     const [showAddfriend, setShowAddFriend] = useState(false);
-    const [friends, setFriends] = useState(initialFriends)
+    const [friends, setFriends] = useState(initialFriends);
+    const [selectedFriend, setSelectedFriend] = useState(null);
 
+    function handleSelection(friend){
+        setSelectedFriend(friend)
+    }
     function handleShowAddFriend(){
         setShowAddFriend(show=>!show)
     }
@@ -42,12 +46,13 @@ function App() {
         <>
             <div style={{display:'flex', gap:'20px'}}>
                 <div className='sidebar'>
-                    <FriendsList friends={friends}/>
+                    <FriendsList friends={friends} onSelection={handleSelection} selectedFriend={selectedFriend}/>
                     {showAddfriend &&
                     (<FormAddFriend onClick={handleFriends}/>)}
                     <Button onClick={handleShowAddFriend}>{showAddfriend ? 'Close' : 'Add friend'}</Button>
                 </div>
-                <FormSplitBill />
+                {selectedFriend &&
+                (<FormSplitBill  friend={selectedFriend}/>)}
             </div>
         </>
     )
