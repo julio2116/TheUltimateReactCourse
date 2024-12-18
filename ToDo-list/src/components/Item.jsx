@@ -1,13 +1,26 @@
+import { useState } from 'react'
 import styles from '../components/Item.module.css'
 
-const Item = ({children}) => {
-    return(
+const Item = ({ task, onDeleteItem, onUpdateItem }) => {
+    const [checked, setChecked] = useState(false);
+    const [edite, setEdite] = useState(false);
+    const [editetask, setEditeTask] = useState('')
+    
+    function handleEdite(){
+        setEdite(edite => !edite);
+        if(edite === true) onUpdateItem(task.id, editetask)
+    }
+
+    return (
         <>
             <li className={styles.item}>
-                <input type="checkbox" />
-                <span>{children}</span>
-                <span>✏️</span>
-                <span>🗑️</span>
+                <input id='checkbox' type="checkbox" value={checked} onChange={() => setChecked(checked => !checked)} />
+                {edite === false ?
+                    <span style={{ textDecoration: checked ? 'line-through' : '', color: task.priority }}>{task.item}</span>
+                    : <input style={{width: '100px'}} placeholder={task.item} onChange={(e) => setEditeTask(e.target.value)} />
+                }
+                <span className={styles.button} onClick={handleEdite}>{edite === false ? '✏️' : '🗃️'}</span>
+                <span className={styles.button} onClick={() => onDeleteItem(task.id)}>🗑️</span>
             </li>
         </>
     )

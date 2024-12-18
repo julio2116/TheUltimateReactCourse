@@ -1,12 +1,25 @@
 import styles from '../components/Header.module.css'
 
-const Header = () => {
+const Header = ({onSetItem, onSetPriority, item, priority, onNewItem}) => {
+
+    function handleNewItem(e){
+        e.preventDefault();
+        const id = crypto.randomUUID()
+        const newItem = {item, priority, id}
+        onNewItem(newItem);
+    }
+
     return (
         <>
             <div className={styles.header}>
                 <h1>To Do list</h1>
-                <form action="">
-                <input type="text" />
+                <form action="" onSubmit={handleNewItem}>
+                <input type="text" onChange={(e)=>onSetItem(e)}/>
+                <select name="" id="" onChange={(e)=>onSetPriority(e)}>
+                    <option value="blue">1</option>
+                    <option value="green">2</option>
+                    <option value="red">3</option>
+                </select>
                 <button>Add</button>
                 </form>
             </div>
