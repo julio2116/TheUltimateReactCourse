@@ -10,10 +10,12 @@ const List = () => {
     const [allTasks, setAllTasks] = useState([]);
 
     function handleSetItem(e){
-        setItem(e.target.value);
+        if(e?.target?.value) return setItem(e.target.value);
+        return setItem(e)
     }
     function handleSetPriority(e){
-        setPriority(e.target.value)
+        if(e?.target?.value) return setPriority(e.target.value);
+        return setPriority(e);
     }
     function NewItem(item){
         setAllTasks([...allTasks , item]);

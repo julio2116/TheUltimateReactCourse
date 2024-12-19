@@ -4,11 +4,12 @@ import styles from '../components/Item.module.css'
 const Item = ({ task, onDeleteItem, onUpdateItem }) => {
     const [checked, setChecked] = useState(false);
     const [edite, setEdite] = useState(false);
-    const [editetask, setEditeTask] = useState('')
+    const [editeTask, setEditeTask] = useState('')
     
     function handleEdite(){
         setEdite(edite => !edite);
-        if(edite === true) onUpdateItem(task.id, editetask)
+        if(!editeTask) return;
+        if(edite === true) onUpdateItem(task.id, editeTask);
     }
 
     return (
