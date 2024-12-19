@@ -10,15 +10,15 @@ const List = () => {
     const [allTasks, setAllTasks] = useState([]);
 
     function handleSetItem(e){
-        if(e?.target?.value) return setItem(e.target.value);
-        return setItem(e)
+        if(e?.target?.value) setItem(e.target.value);
+        else setItem(e);
     }
     function handleSetPriority(e){
-        if(e?.target?.value) return setPriority(e.target.value);
-        return setPriority(e);
+        if(e?.target?.value)setPriority(e.target.value);
+        else setPriority(e);
     }
     function NewItem(item){
-        setAllTasks([...allTasks , item]);
+        setAllTasks([...allTasks, item]);
     }
     function deleteItem(id){
         setAllTasks(allTasks.filter(task=>task.id === id ? false : true))
