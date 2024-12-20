@@ -18,8 +18,8 @@ const Header = ({onSetItem, onSetPriority, item, priority, onNewItem}) => {
             <div className={styles.header}>
                 <h1>To Do list</h1>
                 <form action="" onSubmit={handleNewItem}>
-                <input type="text" value={item} onChange={(e)=>onSetItem(e)}/>
-                <select name="" id="" value={priority} onChange={(e)=>onSetPriority(e)}>
+                <input type="text" value={item} onChange={onSetItem}/>
+                <select name="" id="" value={priority} onChange={onSetPriority}>
                     <option value="blue">1</option>
                     <option value="green">2</option>
                     <option value="red">3</option>
