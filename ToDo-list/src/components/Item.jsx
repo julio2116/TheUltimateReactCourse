@@ -8,7 +8,7 @@ const Item = ({ task, onDeleteItem, onUpdateItem }) => {
     
     function handleEdite(){
         setEdite(edite => !edite);
-        if(!editeTask) return;
+        if(!editeTask) return setEditeTask(task.item);
         if(edite === true) onUpdateItem(task.id, editeTask);
     }
 
