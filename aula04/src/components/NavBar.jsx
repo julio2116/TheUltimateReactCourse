@@ -1,15 +1,14 @@
 import Search from './Search.jsx'
 import Logo from './Logo.jsx'
-import NumResults from './NumResults.jsx'
 
-const NavBar = () => {
+const NavBar = ({children}) => {
 
     return (
         <>
             <nav className="nav-bar">
                 <Logo />
                 <Search />
-                <NumResults />
+                {children}
             </nav>
         </>
     )
