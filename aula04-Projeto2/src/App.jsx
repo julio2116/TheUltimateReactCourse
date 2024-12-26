@@ -1,4 +1,5 @@
 import "./App.css";
+import TextExpender from "./components/TextExpender.jsx";
 
 function App() {
   return (
