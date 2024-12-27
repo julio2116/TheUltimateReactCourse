@@ -1,10 +1,13 @@
 const WatchedSummary = ({watched}) => {
     const average = (arr) =>
     arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
+    let avgImdbRating=null, avgUserRating='', avgRuntime=null
 
-    const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
-    const avgUserRating = average(watched.map((movie) => movie.userRating));
-    const avgRuntime = average(watched.map((movie) => movie.runtime));
+    if(watched.length){
+    avgImdbRating = average(watched.map((movie) => movie.imdbRating)).toFixed(2);
+    avgUserRating = average(watched.map((movie) => movie.userRating)).toFixed(2);
+    avgRuntime = average(watched.map((movie) => movie.runtime)).toFixed(2);
+    }
 
     return (
         <>

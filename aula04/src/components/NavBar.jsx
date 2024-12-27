@@ -7,7 +7,6 @@ const NavBar = ({children}) => {
         <>
             <nav className="nav-bar">
                 <Logo />
-                <Search />
                 {children}
             </nav>
         </>

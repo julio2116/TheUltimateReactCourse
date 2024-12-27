@@ -1,12 +1,12 @@
 import WatchedMovie from "./Watchedmovie.jsx"
 
-const WatchedMoviesList = ({watched}) => {
+const WatchedMoviesList = ({watched, handleDeleteWatched}) => {
     return (
         <>
             <ul className="list">
-                {watched.map((movie) => (
-                    <WatchedMovie movie={movie} key={movie.imdbID}/>
-                ))}
+                {watched.length ? watched.map((movie) => (
+                    <WatchedMovie movie={movie} key={movie.imdbID} handleDeleteWatched={handleDeleteWatched}/>
+                )) : ''}
             </ul>
         </>
     )
