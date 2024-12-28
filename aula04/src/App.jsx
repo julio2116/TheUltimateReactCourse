@@ -37,13 +37,13 @@ const tempWatchedData = [
 const key = "909b1ee3";
 
 function App() {
-  const [watched, setWatched] = useState([]);
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState(null);
-
+  const [watched, setWatched] = useState(()=>JSON.parse(localStorage.getItem('watched')));
+  
   useEffect(
     function () {
       const controller = new AbortController();
@@ -89,6 +89,10 @@ function App() {
     [query]
   );
 
+  useEffect(function(){
+    localStorage.setItem('watched', JSON.stringify(watched))
+  }, [watched])
+
   function handleSelectMovie(id) {
     setSelectedId((selectedId) => (id === selectedId ? null : id));
   }
@@ -97,6 +101,7 @@ function App() {
   }
   function handleAddWatched(movie) {
     setWatched((watched) => [...watched, movie]);
+    // localStorage.setItem('watched', JSON.stringify([...watched, movie]));
   }
   function handleDeleteWatched(id) {
     setWatched((watched) => watched.filter((movie) => movie.imdbId !== id));
