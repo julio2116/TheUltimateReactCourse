@@ -1,0 +1,25 @@
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header{
+    font-size: 48px;
+}
+.information{
+    display: flex;
+    flex-direction: column;
+}
+.information span{
+    display: flex;
+    margin: 0;
+    justify-content: center;
+}
+.buttons{
+    display: grid;
+    margin: 2rem;
+}
+.button{
+    justify-self: center;
+    margin: 5px
+}
