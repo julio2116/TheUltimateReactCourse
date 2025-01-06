@@ -20,14 +20,14 @@ function reducer(state, action) {
     case "payLoan":
       return { ...state, balance: state.loanActive ? state.balance - 5000 : state.balance, loanActive: false, loan: 0 };
     case "closeAccount":
-      return { ...state, isActive: state.balance === 0 ? false : state.isActive };
+      return { ...state, isActive: state.balance === 0 && state.loan === 0 ? false : state.isActive };
     default:
       throw new Error("Action Unknown");
   }
 }
 
 function App() {
-  const [{ isActive, balance, loan, loanActive }, dispatch] = useReducer(reducer, initialState);
+  const [{ isActive, balance, loan }, dispatch] = useReducer(reducer, initialState);
   return (
     <>
       <h1 className="header">useReducer Bank Account</h1>
