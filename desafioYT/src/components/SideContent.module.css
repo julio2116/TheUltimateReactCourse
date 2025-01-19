@@ -6,10 +6,25 @@
     margin-bottom: 10px;
 }
 .lista div{
+    display: grid;
     border-radius: 20px;
-    background-color: blue;
+    background-color: black;
     overflow: hidden;
     object-fit: fill;
     height: 280px;
-    width: 500px
+    width: 500px;
+    justify-content: center;
+    align-content: center;
+}
+.lista img{
+    height: 100%;
+    cursor: pointer;
+}
+.video{
+    display: flex;
+    gap: 15px;
+    font-size: 18px;
+}
+.videoInfo{
+    width: 50%;
 }

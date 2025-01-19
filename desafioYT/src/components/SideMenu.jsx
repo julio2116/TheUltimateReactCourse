@@ -1,7 +1,7 @@
 const SideMenu = () => {
     return(
         <>
-            <div style={{width: '240px', paddingTop: '4rem'}}>
+            <div style={{minWidth: '240px', paddingTop: '4rem'}}>
                 <h1>SideMenu</h1>
             </div>
         </>
