@@ -1,9 +1,7 @@
 import { Link } from 'react-router'
-import { useSearch } from '../context/SearchContext'
 import styles from './MenuHeader.module.css'
 
 const MenuHeader = () => {
-    const {search} = useSearch()
     return (
         <>
             <div className={styles.imgs}>
