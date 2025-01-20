@@ -1,11 +1,14 @@
 import styles from "./SideContent.module.css";
-
 import { useSearch } from "../context/SearchContext";
+import { useNavigate } from "react-router";
 
 const SideContent = () => {
   const { searchResult, dispatch } = useSearch();
+  const navigate = useNavigate();
+
   function handleVideoSelected(videoId){
-    dispatch({type: 'click', payload: videoId})
+    dispatch({type: 'click', payload: videoId});
+    navigate(`/video?id=${videoId}`);
   }
 
   return (

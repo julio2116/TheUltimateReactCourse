@@ -1,0 +1,26 @@
+.mainBox{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.box{
+    margin-top: 100px;
+    width: 495px;
+    height: 110px;
+    background-color: white;
+    padding: 20px 40px 10px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 12px;
+    box-shadow: 0 9px 30px -5px rgb(213, 213, 213);
+}
+.box > h2{
+    font-size: 26px;
+    margin-bottom: 10px;
+    justify-content: center;
+}
+.box span{
+    justify-content: center;
+    text-align: center;
+}

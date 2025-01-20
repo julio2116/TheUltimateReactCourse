@@ -1,21 +1,14 @@
-import { useSearch } from "../context/SearchContext";
 import styles from "./MainBody.module.css";
-import SideContent from "./SideContent";
-import SideMenu from "./SideMenu";
-import VideoPlayer from "./VideoPlayer";
+import { Outlet } from "react-router";
+
 const Body = () => {
-  const { clickVideo } = useSearch();
   return (
-    <main className={styles.body}>
-      {clickVideo ? (
-        <VideoPlayer />
-      ) : (
-        <>
-          <SideMenu />
-          <SideContent />
-        </>
-      )}
-    </main>
+    <>
+      <main className={styles.body}>
+        <Outlet />
+      </main>
+
+    </>
   );
 };
 export default Body;

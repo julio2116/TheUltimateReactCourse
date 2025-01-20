@@ -1,17 +1,24 @@
 import "./App.css";
-import MainBody from "./components/MainBody";
-import Header from "./components/Header";
-import HomePage from "./HomePage";
+import { BrowserRouter, Routes, Route } from "react-router";
 import { SearchProvider } from "./context/SearchContext";
+import HomePage from "./pages/HomePage";
+import FirstPage from "./pages/FirstPage";
+import SearchPage from "./pages/SearchPage";
+import VideoPage from "./pages/VideoPage";
 
 const App = () => {
   return (
     <>
       <SearchProvider>
-        <HomePage>
-          <Header />
-          <MainBody />
-        </HomePage>
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<HomePage />}>
+              <Route index element={<FirstPage />} />
+              <Route path='search' element={<SearchPage />} />
+              <Route path='video' element={<VideoPage />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
       </SearchProvider>
     </>
   );

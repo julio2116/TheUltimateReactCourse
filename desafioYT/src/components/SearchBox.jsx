@@ -1,7 +1,9 @@
 import { useSearch } from "../context/SearchContext";
 import styles from "./SearchBox.module.css";
+import { useNavigate } from "react-router";
 
 const SearchBox = () => {
+  const navigate = useNavigate();
   const { dispatch } = useSearch();
   const key = "AIzaSyCB0gEZJ25Whe87CQvgsKGlMT6_pS8Wpdo";
 
@@ -21,6 +23,7 @@ function handleSearch(e) {
     const form = new FormData(e.target);
     const data = Object.fromEntries(form);
     fetchSearch(data.value);
+    navigate('/search')
   }
   return (
     <div className={styles.searchbox}>
