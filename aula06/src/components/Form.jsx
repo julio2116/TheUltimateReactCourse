@@ -78,7 +78,7 @@ function Form() {
   }
 
   if (geocodingError) return <Message message={geocodingError} />
-  if (!lat && !lng) return <Maessage message='Start by clicking somewhere on the map' />
+  if (!lat && !lng) return <Message message='Start by clicking somewhere on the map' />
   if (isLoadingGeocoding) return <Spinner />
 
   return (

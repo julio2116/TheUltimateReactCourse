@@ -27,9 +27,9 @@ function App() {
               <Route path='pricing' element={<Pricing />} />
               <Route path='login' element={<Login />} />
               <Route path='app' element={
-              <ProtectedRoute>
-                <AppLayout />
-              </ProtectedRoute>}>
+                <ProtectedRoute>
+                  <AppLayout />
+                </ProtectedRoute>}>
                 <Route index element={<Navigate replace to='cities' />} />
                 <Route path="countries" element={<CountryList />} />
                 <Route path='cities' element={<CityList />} />
