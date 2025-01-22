@@ -7,7 +7,6 @@ const Body = () => {
       <main className={styles.body}>
         <Outlet />
       </main>
-
     </>
   );
 };

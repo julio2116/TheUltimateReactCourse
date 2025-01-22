@@ -5,13 +5,15 @@ const VideoPlayer = ({ children }) => {
   const [id] = useSearchParams();
   const videoId = id.get('id');
   const video = `//www.youtube.com/embed/${videoId}`
+  const width = '56%';
+  const height = '80%';
 
   return (
     <>
       <div className={styles.videoBox}>
         <iframe
-          width="960"
-          height="540"
+          width={width}
+          height={height}
           src={video}
           frameBorder={0}
           allow={'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'}
