@@ -3,7 +3,7 @@ import styles from './SideMenu.module.css'
 
 const items = [
   [
-    { icon: "src/assets/inicio.svg", title: "Home" },
+    { icon: "src/assets/inicio.svg", title: "Home", link: '/' },
     { icon: "src/assets/short.svg", title: "Shorts" },
     { icon: "src/assets/inscricoes.svg", title: "Subscriptions" },
   ],
@@ -12,6 +12,7 @@ const items = [
     { icon: "src/assets/historico.svg", title: "History" },
   ],
   [
+    { header: 'Explore' },
     { icon: "src/assets/emAlta.svg", title: "Trending" },
     { icon: "src/assets/musica.svg", title: "Musics" },
     { icon: "src/assets/filmes.svg", title: "Movies" },
@@ -23,15 +24,16 @@ const items = [
     { icon: "src/assets/podcasts.svg", title: "Podcasts" },
   ],
   [
+    { header: 'More from YouTube' },
     { icon: "src/assets/YTPremium.svg", title: "YouTube Premium" },
     { icon: "src/assets/YTmusic.svg", title: "YouTube Music" },
     { icon: "src/assets/YTkids.svg", title: "YouTube Kids" },
   ],
   [
-    {icon: 'src/assets/configuracoes.svg', title: 'Settings'},
-    {icon: 'src/assets/histDenunc.svg', title: 'Report History'},
-    {icon: 'src/assets/ajuda.svg', title: 'Help'},
-    {icon: 'src/assets/enviarFeedback.svg', title: 'Send Feedback'}
+    { icon: 'src/assets/configuracoes.svg', title: 'Settings' },
+    { icon: 'src/assets/histDenunc.svg', title: 'Report History' },
+    { icon: 'src/assets/ajuda.svg', title: 'Help' },
+    { icon: 'src/assets/enviarFeedback.svg', title: 'Send Feedback' }
   ]
 ];
 
@@ -40,7 +42,7 @@ const SideMenu = () => {
     <>
       <nav className={styles.sideMenu}>
         {items.map((item) => (
-          <Submenu items={item} key={item[0].title} />
+          <Submenu items={item} key={item.title} />
         ))}
       </nav>
     </>

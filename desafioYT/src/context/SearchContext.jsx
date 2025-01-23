@@ -5,6 +5,7 @@ const searchContext = createContext();
 const initialValue = {
   searchResult: [],
   videoId: '',
+  videoInfo: []
 };
 
 function reduce(state, action) {
@@ -14,10 +15,10 @@ function reduce(state, action) {
         ...state,
         searchResult: action.payload,
       };
-    case 'click':
+    case 'videoInfo':
       return {
         ...state,
-        videoId: action.payload,
+        videoInfo: action.payload,
       }
     default:
       throw new Error("Uknown action");
@@ -25,7 +26,7 @@ function reduce(state, action) {
 }
 
 function SearchProvider({ children }) {
-  const [{ searchResult, videoId }, dispatch] = useReducer(reduce, initialValue);
+  const [{ searchResult, videoId, videoInfo }, dispatch] = useReducer(reduce, initialValue);
 
   return (
     <>
@@ -33,6 +34,7 @@ function SearchProvider({ children }) {
         value={{
           searchResult,
           videoId,
+          videoInfo,
           dispatch,
         }}
       >

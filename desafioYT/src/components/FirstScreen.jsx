@@ -5,8 +5,8 @@ const FirstScreen = () => {
         <>
             <div className={styles.mainBox}>
                 <div className={styles.box}>
-                    <h2>Que tal uma pesquisa para começar?</h2>
-                    <span>Assista vídeos para nos ajudar a criar um feed de conteúdo que combine com você.</span>
+                    <h2>How about some research to get you started?</h2>
+                    <span>Watch videos to help us create a content feed that suits you.</span>
                 </div>
             </div>
         </>

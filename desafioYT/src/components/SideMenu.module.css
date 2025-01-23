@@ -1,13 +1,21 @@
 .sideMenu{
-    min-width: 220px;
-    padding-top: 4rem;
+    position: fixed;
+    z-index: 2;
+    min-width: 230px;
     scrollbar-width: thin;
     overflow: hidden;
-    max-height: 599px;
+    height: calc(100vh - 42px);
     scrollbar-color: transparent;
     transition: all;
+    bottom: 0;
 }
 .sideMenu:hover{
     overflow: visible;
     overflow-y: auto;
+}
+.sideMenu h3{
+    margin-bottom: -3px;
+    margin-top: 15px;
+    padding-left: 16px;
+    font-weight: 100;
 }

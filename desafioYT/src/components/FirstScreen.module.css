@@ -1,14 +1,17 @@
 .mainBox{
     display: flex;
     justify-content: center;
-    width: 100%;
+    width: calc(100vw - 230px);
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 .box{
     margin-top: 100px;
     width: 495px;
     height: 110px;
     background-color: white;
-    padding: 20px 40px 10px 40px;
+    padding: 20px 40px 15px 40px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -19,6 +22,7 @@
     font-size: 26px;
     margin-bottom: 10px;
     justify-content: center;
+    text-align: center;
 }
 .box span{
     justify-content: center;

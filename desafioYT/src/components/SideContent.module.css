@@ -1,18 +1,26 @@
+.teste{
+    width: calc(100% - 230px);
+    position: absolute;
+    right: 0;
+    top: 0;
+}
 .lista{
     padding-top: 4rem;
     list-style: none;
+    margin-left: 20px;
 }
 .lista li{
     margin-bottom: 10px;
 }
 .lista div{
     display: grid;
-    border-radius: 20px;
+    border-radius: 12px;
     background-color: black;
     overflow: hidden;
     object-fit: fill;
-    height: 280px;
-    width: 500px;
+    height: 272px;
+    width: 50%;
+    max-width: 480px;
     justify-content: center;
     align-content: center;
 }
@@ -27,4 +35,11 @@
 }
 .videoInfo{
     width: 50%;
+}
+.videoInfo h4{
+    margin-top: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: sans-serif;
+    font-weight: 300;
 }
