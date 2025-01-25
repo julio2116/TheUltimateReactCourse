@@ -6,10 +6,10 @@ const Submenu = ({ items }) => {
     <>
       {items[0].header ? <h3>{items[0].header}</h3> : ''}
       <ul className={styles.lista}>
-        {items.map((item) => (
+        {items.map((item, index) => (
           item.icon ?
             <>
-              <li className={styles.item} key={item.icon}>
+              <li className={styles.item} key={index}>
                 <Link to={item.link}>
                   <img src={item.icon} alt="" />
                   <p>{item.title}</p>

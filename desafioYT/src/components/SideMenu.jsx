@@ -42,7 +42,7 @@ const SideMenu = () => {
     <>
       <nav className={styles.sideMenu}>
         {items.map((item) => (
-          <Submenu items={item} key={item.title} />
+          <Submenu items={item} key={item[0].title} />
         ))}
       </nav>
     </>

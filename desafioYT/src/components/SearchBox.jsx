@@ -1,43 +1,16 @@
-import { useEffect, useState } from "react";
-import { useSearch } from "../context/SearchContext";
 import styles from "./SearchBox.module.css";
 import { useNavigate } from "react-router";
 
 const SearchBox = () => {
   const navigate = useNavigate();
-  const { dispatch, videoInfo, searchResult } = useSearch();
-  const [ listIds, setListIds ] = useState('');
-  const key = "AIzaSyCB0gEZJ25Whe87CQvgsKGlMT6_pS8Wpdo";
-
-  function fetchSearch(term) {
-    async function fetchSearchResult(term) {
-      const res = await fetch(
-        `https://www.googleapis.com/youtube/v3/search?key=${key}&part=snippet&q=${term}&maxResults=50`
-      );
-      const data = await res.json();
-      const result = data.items.map(item => (item.id.videoId)).join();
-      setListIds(result);
-      dispatch({ type: "search", payload: data });
-    }
-    fetchSearchResult(term);
-  }
-  useEffect(function fetchteste() {
-    async function fetchVideo() {
-      const res = await fetch(
-        `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${listIds}&key=${key}`
-      );
-      const data = await res.json();
-      dispatch({ type: "videoInfo", payload: data });
-    }
-    fetchVideo();
-  }, [listIds, dispatch])
 
   function handleSearch(e) {
     e.preventDefault();
+
     const form = new FormData(e.target);
+    if(e.target[0].value === '') return
     const data = Object.fromEntries(form);
-    fetchSearch(data.value);
-    navigate('/search')
+    navigate(`/search?search=${data.value}`)
   }
   return (
     <div className={styles.searchbox}>
