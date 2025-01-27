@@ -9,13 +9,14 @@ function useTeste() {
   const [viewsIds, setViewsIds] = useState("");
   const [channels, setChannels] = useState([]);
   const [channelsIds, setChannelsIds] = useState("");
-//   const key = "AIzaSyCB0gEZJ25Whe87CQvgsKGlMT6_pS8Wpdo";
-  const key = "AIzaSyDnrpgoUVD1uxJ8ijOdxhefHUb9ChiG9Bk";
-  //   const key = "AIzaSyCvJM7ZW8I2K0JEnOO76qa9w0DUyrg8VrA";
+  const key = "AIzaSyCB0gEZJ25Whe87CQvgsKGlMT6_pS8Wpdo";
+  let videoInfo = [{titulo, views, time, photo, channel, description}];
+  // const key = "AIzaSyDnrpgoUVD1uxJ8ijOdxhefHUb9ChiG9Bk";
+  // const key = "AIzaSyCvJM7ZW8I2K0JEnOO76qa9w0DUyrg8VrA";
   
 
   useEffect(
-    function bigTeste() {
+    function() {
       async function fetchSearchResult() {
         const res = await fetch(
           `https://www.googleapis.com/youtube/v3/search?key=${key}&part=snippet&q=${termSearched}&maxResults=5`
@@ -31,14 +32,14 @@ function useTeste() {
         setChannelsIds(() => resultChannels);
       }
       fetchSearchResult();
-      async function fetchVideo() {
+      async function fetchViews() {
         const res = await fetch(
           `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${viewsIds}&key=${key}`
         );
         const data = await res.json();
         setViews(() => data);
       }
-      fetchVideo();
+      fetchViews();
       async function fetchChannels() {
         const res = await fetch(
           `https://www.googleapis.com/youtube/v3/channels?part=statistics,contentDetails,snippet&id=${channelsIds}&key=${key}`
@@ -50,6 +51,9 @@ function useTeste() {
     },
     [viewsIds, channelsIds, termSearched]
   );
+
+  const teste = views.items.map(item=>({id:item.id, kind:item.kind}))
+
   return [searchResult, views, channels];
 }
 export { useTeste };

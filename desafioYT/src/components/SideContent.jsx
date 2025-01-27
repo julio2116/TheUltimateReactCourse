@@ -46,3 +46,8 @@ export default SideContent;
 // ser renderizado de acordo com o tipo do resultado da busca, canal ou video
 //renderizar imagem, nome do canal, se tem ou não legendas, máxima resolução, arredondar quantidade
 //de views, há quanto tempo foi postado
+
+// titulo
+// viwes, tempo em que foi lançado
+// foto do canal, nome do canal
+// descrição
