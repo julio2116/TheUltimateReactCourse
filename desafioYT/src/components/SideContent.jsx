@@ -5,9 +5,6 @@ import { useTeste } from "../hooks/UseTeste";
 const SideContent = () => {
   const navigate = useNavigate();
   const [searchResult, views, channels] = useTeste();
-  console.log(searchResult)
-  console.log(views)
-  console.log(channels)
 
   function handleVideoSelected(videoId) {
     console.log(videoId)
