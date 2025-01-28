@@ -10,10 +10,10 @@ function useTeste() {
   const [channels, setChannels] = useState([]);
   const [channelsIds, setChannelsIds] = useState("");
   // const key = "AIzaSyCB0gEZJ25Whe87CQvgsKGlMT6_pS8Wpdo";
-  // let videoInfo = [{titulo, views, time, photo, channel, description}];
   // const key = "AIzaSyDnrpgoUVD1uxJ8ijOdxhefHUb9ChiG9Bk";
   const key = "AIzaSyCvJM7ZW8I2K0JEnOO76qa9w0DUyrg8VrA";
 
+  // let videoInfo = [{titulo, views, time, photo, channel, description}];
 
   useEffect(
     function () {
@@ -51,28 +51,61 @@ function useTeste() {
     [viewsIds, channelsIds, termSearched]
   );
 
-  const teste1 = searchResult?.items?.map(item => ({ channelId: item.snippet.channelId, videoId: item.id.videoId, titleVideo: item.snippet.title, description: item.snippet.description, thumb: item.snippet.thumbnails.high.url, published: item.snippet.publishedAt }))
-  const teste2 = channels?.items?.map(item => ({ channelId: item.id, icon: item.snippet.thumbnails.high.url, channelTitle: item.snippet.title }))
-  const teste3 = views?.items?.map(item => ({ videoId: item.id, kind: item.kind, views: item.statistics.viewCount }))
+  const teste1 = searchResult?.items?.map((item) => ({
+    channelId: item.snippet.channelId,
+    videoId: item.id.videoId,
+    titleVideo: item.snippet.title,
+    description: item.snippet.description,
+    thumb: item.snippet.thumbnails.high.url,
+    published: item.snippet.publishedAt,
+  }));
+  const teste2 = channels?.items?.map((item) => ({
+    channelId: item.id,
+    icon: item.snippet.thumbnails.high.url,
+    channelTitle: item.snippet.title,
+  }));
+  const teste3 = views?.items?.map((item) => ({
+    videoId: item.id,
+    kind: item.kind,
+    views: item.statistics.viewCount,
+  }));
   function joinObjects() {
-    const joinVideoChannel = teste1?.map(item1 => (
-      teste2?.filter(item2 =>
-        item2.channelId === item1.channelId).map(item2 =>
-          Object.assign({}, item1, item2))
-    ));
-    // const joinVideoChannelViews = joinVideoChannel?.map(item1 => (
-    //   teste3?.filter(item3 =>
-    //     item3.videoId === item1.videoId).map(item3 =>{
-    //       Object.assign({}, item1, item3)})
-    // ));
+    const joinVideoChannel = teste1?.map((item1) =>
+      teste2
+        ?.filter((item2) => item2.channelId === item1.channelId)
+        .map((item2) => Object.assign({}, item1, item2))
+    );
+    const newJoinVideoChannel = joinVideoChannel
+      ?.map((item) => item?.[0])
+      .filter(Boolean);
 
-    return joinVideoChannel
+    const joinVideoChannelViews = newJoinVideoChannel?.map((item1) =>
+      teste3
+        ?.filter((item3) => item3.videoId === item1.videoId)
+        .map((item3) => Object.assign({}, item1, item3))
+    );
+    const teste = joinVideoChannelViews
+      ?.map((item) => item?.[0])
+      .filter(Boolean);
+
+    const newJoinVideoChannelViews = teste;
+    for (let i = 0; i < teste.length - 1; i++) {
+      for (let j = 0; j < teste.length - 1; j++) {
+        if (
+          newJoinVideoChannelViews.titleVideo !== newJoinVideoChannel.titleVideo
+        ) {
+          newJoinVideoChannelViews.push(newJoinVideoChannel[i]);
+        }
+      }
+    }
+
+    return newJoinVideoChannelViews;
   }
 
-  console.log(teste1)
-  console.log(teste2)
-  console.log(teste3)
-  console.log(joinObjects())
+  console.log(teste1);
+  console.log(teste2);
+  console.log(teste3);
+  console.log(joinObjects());
 
   return [searchResult, views, channels];
 }
