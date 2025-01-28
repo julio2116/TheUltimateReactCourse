@@ -4,7 +4,8 @@ import { useTeste } from "../hooks/UseTeste";
 
 const SideContent = () => {
   const navigate = useNavigate();
-  const [searchResult, views, channels] = useTeste();
+  const result = useTeste();
+  console.log(result)
 
   function handleVideoSelected(videoId) {
     console.log(videoId)
@@ -14,20 +15,20 @@ const SideContent = () => {
     <>
       <div className={styles.teste}>
         <ul className={styles.lista}>
-          {searchResult?.items?.map((item, index) => (
-            <li key={item.id.videoId} className={styles.video}>
+          {result.map((item) => (
+            <li key={item.videoId} className={styles.video}>
               <div>
                 <img
-                  src={item.snippet.thumbnails.high.url}
+                  src={item.thumb}
                   alt=""
-                  onClick={() => handleVideoSelected(item.id.videoId)}
+                  onClick={() => handleVideoSelected(item.videoId)}
                 />
               </div>
               <span className={styles.videoInfo}>
-                <h4 onClick={() => handleVideoSelected(item.id.videoId)}>
-                  {item.snippet.title}
+                <h4 onClick={() => handleVideoSelected(item.videoId)}>
+                  {item.titleVideo}
                 </h4>
-                <p>{views?.items[index]?.statistics?.viewCount}</p>
+                <p>{item.views}</p>
               </span>
             </li>
           ))}
