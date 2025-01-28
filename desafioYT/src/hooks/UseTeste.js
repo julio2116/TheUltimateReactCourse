@@ -10,8 +10,8 @@ function useTeste() {
   const [channels, setChannels] = useState([]);
   const [channelsIds, setChannelsIds] = useState("");
   // const key = "AIzaSyCB0gEZJ25Whe87CQvgsKGlMT6_pS8Wpdo";
-  // const key = "AIzaSyDnrpgoUVD1uxJ8ijOdxhefHUb9ChiG9Bk";
-  const key = "AIzaSyCvJM7ZW8I2K0JEnOO76qa9w0DUyrg8VrA";
+  const key = "AIzaSyDnrpgoUVD1uxJ8ijOdxhefHUb9ChiG9Bk";
+  // const key = "AIzaSyCvJM7ZW8I2K0JEnOO76qa9w0DUyrg8VrA";
 
   // let videoInfo = [{titulo, views, time, photo, channel, description}];
 
@@ -19,7 +19,7 @@ function useTeste() {
     function () {
       async function fetchSearchResult() {
         const res = await fetch(
-          `https://www.googleapis.com/youtube/v3/search?key=${key}&part=snippet&q=${termSearched}&maxResults=5`
+          `https://www.googleapis.com/youtube/v3/search?key=${key}&part=snippet&q=${termSearched}&maxResults=5&type=video`
         );
         const data = await res.json();
         setSearchResult(data);
@@ -52,6 +52,7 @@ function useTeste() {
   );
 
   const teste1 = searchResult?.items?.map((item) => ({
+    id: item.etag,
     channelId: item.snippet.channelId,
     videoId: item.id.videoId,
     titleVideo: item.snippet.title,
@@ -69,7 +70,7 @@ function useTeste() {
     kind: item.kind,
     views: item.statistics.viewCount,
   }));
-  function joinObjects() {
+  function joinObjectsVideos() {
     const joinVideoChannel = teste1?.map((item1) =>
       teste2
         ?.filter((item2) => item2.channelId === item1.channelId)
@@ -84,28 +85,20 @@ function useTeste() {
         ?.filter((item3) => item3.videoId === item1.videoId)
         .map((item3) => Object.assign({}, item1, item3))
     );
-    const teste = joinVideoChannelViews
+    const newJoinVideoChannelViews = joinVideoChannelViews
       ?.map((item) => item?.[0])
       .filter(Boolean);
 
-    const newJoinVideoChannelViews = teste;
-    for (let i = 0; i < teste.length - 1; i++) {
-      for (let j = 0; j < teste.length - 1; j++) {
-        if (
-          newJoinVideoChannelViews.titleVideo !== newJoinVideoChannel.titleVideo
-        ) {
-          newJoinVideoChannelViews.push(newJoinVideoChannel[i]);
-        }
-      }
-    }
+    // const a = newJoinVideoChannel?.map((item1) => newJoinVideoChannelViews?.some(item => item.id === item1.id) ? null : item1).filter(item=>item !== null)
 
     return newJoinVideoChannelViews;
   }
 
+  console.log(searchResult);
   console.log(teste1);
   console.log(teste2);
   console.log(teste3);
-  console.log(joinObjects());
+  console.log(joinObjectsVideos());
 
   return [searchResult, views, channels];
 }
