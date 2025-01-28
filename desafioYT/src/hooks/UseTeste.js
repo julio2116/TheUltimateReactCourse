@@ -10,10 +10,8 @@ function useTeste() {
   const [channels, setChannels] = useState([]);
   const [channelsIds, setChannelsIds] = useState("");
   // const key = "AIzaSyCB0gEZJ25Whe87CQvgsKGlMT6_pS8Wpdo";
-  const key = "AIzaSyDnrpgoUVD1uxJ8ijOdxhefHUb9ChiG9Bk";
-  // const key = "AIzaSyCvJM7ZW8I2K0JEnOO76qa9w0DUyrg8VrA";
-
-  // let videoInfo = [{titulo, views, time, photo, channel, description}];
+  // const key = "AIzaSyDnrpgoUVD1uxJ8ijOdxhefHUb9ChiG9Bk";
+  const key = "AIzaSyCvJM7ZW8I2K0JEnOO76qa9w0DUyrg8VrA";
 
   useEffect(
     function () {
