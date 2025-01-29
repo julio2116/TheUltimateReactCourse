@@ -78,18 +78,15 @@ function useSearchResult() {
         ?.filter((item2) => item2.channelId === item1.channelId)
         .map((item2) => Object.assign({}, item1, item2))
     );
-    const newJoinVideoChannel = joinVideoChannel
-      ?.map((item) => item?.[0])
-      .filter(Boolean);
+
+    const newJoinVideoChannel = joinVideoChannel?.map((item) => item?.[0]).filter(Boolean);
 
     const joinVideoChannelViews = newJoinVideoChannel?.map((item1) =>
       allViewsObject
         ?.filter((item3) => item3.videoId === item1.videoId)
         .map((item3) => Object.assign({}, item1, item3))
     );
-    const newJoinVideoChannelViews = joinVideoChannelViews
-      ?.map((item) => item?.[0])
-      .filter(Boolean);
+    const newJoinVideoChannelViews = joinVideoChannelViews?.map((item) => item?.[0]).filter(Boolean);
 
     const others = newJoinVideoChannel?.map((item1) => newJoinVideoChannelViews?.some(item => item.id === item1.id) ? null : item1).filter(item => item !== null)
     const result = [...(others || []), ...(newJoinVideoChannelViews || [])]

@@ -56,3 +56,6 @@ export default SideContent;
 // viwes, tempo em que foi lançado
 // foto do canal, nome do canal
 // descrição
+// novo? renderizar tag apenas se o video tiver sido postado a 6 dias ou menos
+// 4k? renderizar tag apenas se houver 4k disponivel
+// canal verificado?
