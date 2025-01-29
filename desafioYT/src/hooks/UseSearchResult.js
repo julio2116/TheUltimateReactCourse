@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 
-function useTeste() {
+function useSearchResult() {
   const [term] = useSearchParams();
   const termSearched = term.get("search");
   const [searchResult, setSearchResult] = useState([]);
@@ -100,4 +100,4 @@ function useTeste() {
   const result = joinObjectsVideos()
   return result
 }
-export { useTeste };
+export { useSearchResult };

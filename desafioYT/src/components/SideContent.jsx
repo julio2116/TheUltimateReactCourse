@@ -1,10 +1,10 @@
 import styles from "./SideContent.module.css";
 import { useNavigate } from "react-router";
-import { useTeste } from "../hooks/UseTeste";
+import { useSearchResult } from "../hooks/UseSearchResult";
 
 const SideContent = () => {
   const navigate = useNavigate();
-  const result = useTeste();
+  const result = useSearchResult();
   console.log(result)
 
   function handleVideoSelected(videoId) {
@@ -28,7 +28,14 @@ const SideContent = () => {
                 <h4 onClick={() => handleVideoSelected(item.videoId)}>
                   {item.titleVideo}
                 </h4>
-                <p>{item.views}</p>
+                <span>{item.views}</span>
+                .
+                <span>{item.published}</span>
+                <span style={{display: 'block'}}>
+                  <img src={item.icon} style={{ width: '35px', height: '35px', borderRadius: '50%' }} alt="" />
+                  <span>{item.channelTitle}</span>
+                </span>
+                <span>{item.description}</span>
               </span>
             </li>
           ))}
@@ -40,7 +47,7 @@ const SideContent = () => {
 export default SideContent;
 
 
-//é necessário cruzar as IDS do canal, com as de views e canais, e separar o tipo de informação que deve 
+//é necessário cruzar as IDS do canal, com as de views e canais, e separar o tipo de informação que deve
 // ser renderizado de acordo com o tipo do resultado da busca, canal, playlist ou video
 //renderizar imagem, nome do canal, se tem ou não legendas, máxima resolução, arredondar quantidade
 //de views, há quanto tempo foi postado
