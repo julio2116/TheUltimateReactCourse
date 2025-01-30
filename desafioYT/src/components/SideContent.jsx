@@ -11,6 +11,18 @@ const SideContent = () => {
     console.log(videoId)
     navigate(`/video?id=${videoId}`);
   }
+  function formatViwes(views) {
+    views = parseInt(views)
+
+    const formats = {10e5: 'K', 10e8: 'M', 10e11: 'B'}
+    for(const [limit, simbol] of Object.entries(formats)){
+      if (views < limit){
+        console.log('formatacao: ',`${(views/limit * 1000).toFixed(1)} ${simbol}`)
+        return `${views/limit * 1000} ${simbol}`
+      }
+    }
+  }
+
   return (
     <>
       <div className={styles.teste}>
@@ -28,10 +40,10 @@ const SideContent = () => {
                 <h4 onClick={() => handleVideoSelected(item.videoId)}>
                   {item.titleVideo}
                 </h4>
-                <span>{item.views}</span>
-                .
+                <span>{item.views} viwes</span>
+                . {console.log(item.views ? formatViwes(item.views) : '') }
                 <span>{item.published}</span>
-                <span style={{display: 'block'}}>
+                <span style={{ display: 'block' }}>
                   <img src={item.icon} style={{ width: '35px', height: '35px', borderRadius: '50%' }} alt="" />
                   <span>{item.channelTitle}</span>
                 </span>
