@@ -8,7 +8,6 @@ const SideContent = () => {
   console.log(result)
 
   function handleVideoSelected(videoId) {
-    console.log(videoId)
     navigate(`/video?id=${videoId}`);
   }
   function formatViwes(views) {
@@ -16,9 +15,31 @@ const SideContent = () => {
 
     const formats = {10e5: 'K', 10e8: 'M', 10e11: 'B'}
     for(const [limit, simbol] of Object.entries(formats)){
+      if (views < 10e2){return `${views}`}
       if (views < limit){
-        console.log('formatacao: ',`${(views/limit * 1000).toFixed(1)} ${simbol}`)
-        return `${views/limit * 1000} ${simbol}`
+        const numberFormated = (views/limit * 1000).toFixed(1)
+        return `${numberFormated}${simbol}`
+      }
+    }
+  }
+  function formatTimePublished(time){
+    const timeParsed = Date.parse(time);
+    const dateToday = Date.now();
+    const timePostedML = dateToday - timeParsed;
+
+    const formats ={
+      year: 3.156e10,
+      month: 2628202743.3266106,
+      week: 604845995.8932518959,
+      day: 86406570.841893151402,
+      hour: 3600273.7850788808428,
+      minut: 60004.563084648012591,
+      second: 1000.0760514108002326
+    }
+    for(const [period, limit] of Object.entries(formats)){
+      if(timePostedML > limit) {
+        const value = Math.floor(timePostedML / limit)
+        return (value > 1 ? `${value} ${period}s ago` : `${value} ${period} ago`)
       }
     }
   }
@@ -40,9 +61,9 @@ const SideContent = () => {
                 <h4 onClick={() => handleVideoSelected(item.videoId)}>
                   {item.titleVideo}
                 </h4>
-                <span>{item.views} viwes</span>
-                . {console.log(item.views ? formatViwes(item.views) : '') }
-                <span>{item.published}</span>
+                <span>{item.views ? formatViwes(item.views) : ''} viwes</span>
+                . 
+                <span>{formatTimePublished(item.published)}</span>
                 <span style={{ display: 'block' }}>
                   <img src={item.icon} style={{ width: '35px', height: '35px', borderRadius: '50%' }} alt="" />
                   <span>{item.channelTitle}</span>
