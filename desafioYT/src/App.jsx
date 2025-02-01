@@ -14,8 +14,8 @@ const App = () => {
           <Routes>
             <Route path='/' element={<HomePage />}>
               <Route index element={<FirstPage />} />
-              <Route path='search' element={<SearchPage />} />
-              <Route path='video' element={<VideoPage />} />
+              <Route path='result' element={<SearchPage />} />
+              <Route path='watch' element={<VideoPage />} />
             </Route>
           </Routes>
         </BrowserRouter>

@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router";
 
 function useSearchResult() {
   const [term] = useSearchParams();
-  const termSearched = term.get("search");
+  const termSearched = term.get("search_query");
   const [searchResult, setSearchResult] = useState([]);
   const [views, setViews] = useState([]);
   const [channels, setChannels] = useState([]);
@@ -15,7 +15,7 @@ function useSearchResult() {
     function () {
       async function fetchSearchResult() {
         const res = await fetch(
-          `https://www.googleapis.com/youtube/v3/search?key=${key}&part=snippet&q=${termSearched}&maxResults=5`
+          `https://www.googleapis.com/youtube/v3/search?key=${key}&part=snippet&q=${termSearched}&maxResults=10`
         );
         const data = await res.json();
         setSearchResult(data);
@@ -27,20 +27,24 @@ function useSearchResult() {
   useEffect(
     function () {
       async function fetchViews() {
-        const viewsIds = searchResult?.items?.map((item) => item.id.videoId).join();
+        const viewsIds = searchResult?.items
+          ?.map((item) => item.id.videoId)
+          .join();
         const res = await fetch(
-          `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${viewsIds}&key=${key}`
-          );
-          const data = await res.json();
-          setViews(() => data);
-        }
-        fetchViews();
+          `https://www.googleapis.com/youtube/v3/videos?part=statistics,contentDetails&id=${viewsIds}&key=${key}`
+        );
+        const data = await res.json();
+        setViews(() => data);
+      }
+      fetchViews();
     },
     [searchResult]
   );
   useEffect(
     function () {
-      const channelsIds = searchResult?.items?.map((item) => item.snippet.channelId).join();
+      const channelsIds = searchResult?.items
+        ?.map((item) => item.snippet.channelId)
+        .join();
       async function fetchChannels() {
         const res = await fetch(
           `https://www.googleapis.com/youtube/v3/channels?part=statistics,contentDetails,snippet&id=${channelsIds}&key=${key}`
@@ -72,6 +76,8 @@ function useSearchResult() {
     const allViewsObject = views?.items?.map((item) => ({
       videoId: item.id,
       views: item.statistics.viewCount,
+      definition: item.contentDetails.definition,
+      duration: item.contentDetails.duration,
     }));
     const joinVideoChannel = allSearchResultsObjects?.map((item1) =>
       allChannelsObject
@@ -79,22 +85,33 @@ function useSearchResult() {
         .map((item2) => Object.assign({}, item1, item2))
     );
 
-    const newJoinVideoChannel = joinVideoChannel?.map((item) => item?.[0]).filter(Boolean);
+    const newJoinVideoChannel = joinVideoChannel
+      ?.map((item) => item?.[0])
+      .filter(Boolean);
 
     const joinVideoChannelViews = newJoinVideoChannel?.map((item1) =>
       allViewsObject
         ?.filter((item3) => item3.videoId === item1.videoId)
         .map((item3) => Object.assign({}, item1, item3))
     );
-    const newJoinVideoChannelViews = joinVideoChannelViews?.map((item) => item?.[0]).filter(Boolean);
+    const newJoinVideoChannelViews = joinVideoChannelViews
+      ?.map((item) => item?.[0])
+      .filter(Boolean);
 
-    const others = newJoinVideoChannel?.map((item1) => newJoinVideoChannelViews?.some(item => item.id === item1.id) ? null : item1).filter(item => item !== null)
-    const result = [...(others || []), ...(newJoinVideoChannelViews || [])]
+    const others = newJoinVideoChannel
+      ?.map((item1) =>
+        newJoinVideoChannelViews?.some((item) => item.id === item1.id)
+          ? null
+          : item1
+      )
+      .filter((item) => item !== null);
+    const result = [...(others || []), ...(newJoinVideoChannelViews || [])];
 
     return result;
   }
 
-  const result = joinObjectsVideos()
-  return result
+  const result = joinObjectsVideos();
+  console.log(result)
+  return result;
 }
 export { useSearchResult };

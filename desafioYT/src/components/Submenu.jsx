@@ -1,13 +1,13 @@
-import styles from './Submenu.module.css'
-import {Link} from 'react-router'
+import styles from "./Submenu.module.css";
+import { Link } from "react-router";
 
 const Submenu = ({ items }) => {
   return (
     <>
-      {items[0].header ? <h3>{items[0].header}</h3> : ''}
+      {items[0].header ? <h3>{items[0].header}</h3> : ""}
       <ul className={styles.lista}>
-        {items.map((item, index) => (
-          item.icon ?
+        {items.map((item, index) =>
+          item.icon ? (
             <>
               <li className={styles.item} key={index}>
                 <Link to={item.link}>
@@ -16,8 +16,10 @@ const Submenu = ({ items }) => {
                 </Link>
               </li>
             </>
-            : ''
-        ))}
+          ) : (
+            ""
+          )
+        )}
       </ul>
     </>
   );

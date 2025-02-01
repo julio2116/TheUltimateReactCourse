@@ -6,7 +6,7 @@ import { useState } from "react";
 const VideoPlayer = ({ children }) => {
   const [id] = useSearchParams();
   const [played, setPlayed] = useState();
-  const videoId = id.get("id");
+  const videoId = id.get("v");
   const video = `https://www.youtube.com/watch?v=${videoId}`;
   const width = "51%";
   const height = "75%";

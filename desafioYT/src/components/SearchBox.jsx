@@ -10,7 +10,7 @@ const SearchBox = () => {
     const form = new FormData(e.target);
     if(e.target[0].value === '') return
     const data = Object.fromEntries(form);
-    navigate(`/search?search=${data.value}`)
+    navigate(`/result?search_query=${data.value}`)
   }
   return (
     <div className={styles.searchbox}>
