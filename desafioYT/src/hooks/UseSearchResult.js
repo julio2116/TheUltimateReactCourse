@@ -15,6 +15,7 @@ function useSearchResult() {
   useEffect(
     function () {
       if (!termSearched || termSearched === lastSearchTerm.current) return;
+      lastSearchTerm.current = termSearched;
 
       async function fetchData() {
         const res = await fetch(
@@ -46,7 +47,7 @@ function useSearchResult() {
       }
       fetchData();
     },
-    [termSearched]
+    [termSearched, lastSearchTerm, searchResult.items]
   );
 
   function joinObjectsVideos() {
@@ -111,7 +112,6 @@ function useSearchResult() {
       period = period.replace("H", ":");
     }
     period = period.split(":");
-    console.log(period[0])
     let result = `${period[0]}:`;
     if (period.length > 1) {
       for (let i = 1; i < period.length; i++) {
