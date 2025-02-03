@@ -1,7 +1,13 @@
 import styles from "./Submenu.module.css";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const Submenu = ({ items }) => {
+  const navigate = useNavigate();
+
+  function handleNavigateToHome(){
+    
+    navigate('/')
+  }
   return (
     <>
       {items[0].header ? <h3>{items[0].header}</h3> : ""}

@@ -8,8 +8,8 @@ function useSearchResult() {
   const [views, setViews] = useState([]);
   const [channels, setChannels] = useState([]);
   const lastSearchTerm = useRef("");
-  // const key = "AIzaSyCB0gEZJ25Whe87CQvgsKGlMT6_pS8Wpdo";
-  const key = "AIzaSyDnrpgoUVD1uxJ8ijOdxhefHUb9ChiG9Bk";
+  const key = "AIzaSyCB0gEZJ25Whe87CQvgsKGlMT6_pS8Wpdo";
+  // const key = "AIzaSyDnrpgoUVD1uxJ8ijOdxhefHUb9ChiG9Bk";
   // const key = "AIzaSyCvJM7ZW8I2K0JEnOO76qa9w0DUyrg8VrA";
 
   useEffect(
@@ -19,15 +19,15 @@ function useSearchResult() {
 
       async function fetchData() {
         const res = await fetch(
-          `https://www.googleapis.com/youtube/v3/search?key=${key}&part=snippet&q=${termSearched}&maxResults=10`
+          `https://www.googleapis.com/youtube/v3/search?key=${key}&part=snippet&q=${termSearched}&maxResults=50`
         );
         const data = await res.json();
         setSearchResult(()=>data);
 
-        const channelsIds = searchResult?.items
+        const channelsIds = data?.items
           ?.map((item) => item.snippet.channelId)
           .join();
-        const viewsIds = searchResult?.items
+        const viewsIds = data?.items
           ?.map((item) => item.id.videoId)
           .join();
 
@@ -47,7 +47,7 @@ function useSearchResult() {
       }
       fetchData();
     },
-    [termSearched, lastSearchTerm, searchResult.items]
+    [termSearched]
   );
 
   function joinObjectsVideos() {

@@ -27,7 +27,10 @@
     align-content: center;
     background-size: cover;
 }
-.list img{
+.thumb > img{
+    height: 100%;
+}
+.list > img{
     height: 100%;
     cursor: pointer;
     object-fit: cover;
@@ -93,7 +96,5 @@
     gap: 10px;
 }
 .icon{
-    width: 30px;
-    height: 30px;
     border-radius: 50%;
 }

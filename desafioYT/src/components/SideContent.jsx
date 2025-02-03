@@ -3,7 +3,6 @@ import { useNavigate } from "react-router";
 import { useSearchResult } from "../hooks/UseSearchResult";
 import { handlePublishedTime, newContent } from "../ultils/publishedTime";
 import { formatViwes } from "../ultils/FormatNumbers";
-import { useCallback } from "react";
 
 const SideContent = () => {
   const navigate = useNavigate();
@@ -43,7 +42,7 @@ const SideContent = () => {
                   </span>
                 </div>
                 <div className={styles.channel}>
-                  <img className={styles.icon} src={item.icon} alt="" />
+                  <img className={styles.icon} style={{width: '30px', height: '30px'}} src={item.icon} alt="" />
                   <span>{item.channelTitle}</span>
                 </div>
                 <span className={styles.content}>
