@@ -1,11 +1,11 @@
 import { handlePublishedTime, newContent } from "../ultils/publishedTime";
-import { formatViwes } from "../ultils/FormatNumbers";
+import { formatNumbers } from "../ultils/FormatNumbers";
 import { useNavigate } from "react-router";
 import styles from './SearchResultVideo.module.css';
 
 const SearchResultVideo = ({item}) => {
-
     const navigate = useNavigate();
+    
     function handleVideoSelected(videoId) {
       navigate(`/watch?v=${videoId}`);
     }
@@ -28,7 +28,7 @@ const SearchResultVideo = ({item}) => {
                   {item.titleVideo}
                 </h4>
                 <div>
-                  <span>{item.views ? formatViwes(item.views) : ""} viwes</span>
+                  <span>{item.views ? formatNumbers(item.views) : ""} viwes</span>
                   <span className={styles.publishedTime}>
                     {handlePublishedTime(item.published)}
                   </span>

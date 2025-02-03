@@ -1,6 +1,7 @@
 import styles from "./SideContent.module.css";
 import { useSearchResult } from "../hooks/UseSearchResult";
 import SearchResultVideo from './SearchResultVideo'
+import SearchResultChannel from './SearchResultChannel'
 
 const SideContent = () => {
   const result = useSearchResult()

@@ -65,6 +65,8 @@ function useSearchResult() {
       channelId: item.id,
       icon: item.snippet.thumbnails.high.url,
       channelTitle: item.snippet.title,
+      customUrl: item.snippet.customUrl,
+      subscriberCount: item.statistics.subscriberCount,
     }));
     const allViewsObject = views?.items?.map((item) => ({
       videoId: item.id,
@@ -128,6 +130,7 @@ function useSearchResult() {
   }
 
   const result = joinObjectsVideos();
+  console.log(channels)
   return result;
 }
 export { useSearchResult };
