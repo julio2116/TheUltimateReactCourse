@@ -8,8 +8,8 @@ function useSearchResult() {
   const [views, setViews] = useState([]);
   const [channels, setChannels] = useState([]);
   const lastSearchTerm = useRef("");
-  const key = "AIzaSyCB0gEZJ25Whe87CQvgsKGlMT6_pS8Wpdo";
-  // const key = "AIzaSyDnrpgoUVD1uxJ8ijOdxhefHUb9ChiG9Bk";
+  // const key = "AIzaSyCB0gEZJ25Whe87CQvgsKGlMT6_pS8Wpdo";
+  const key = "AIzaSyDnrpgoUVD1uxJ8ijOdxhefHUb9ChiG9Bk";
   // const key = "AIzaSyCvJM7ZW8I2K0JEnOO76qa9w0DUyrg8VrA";
 
   useEffect(
@@ -22,8 +22,9 @@ function useSearchResult() {
           `https://www.googleapis.com/youtube/v3/search?key=${key}&part=snippet&q=${termSearched}&maxResults=50`
         );
         const data = await res.json();
-        setSearchResult(()=>data);
-
+        setSearchResult((prev)=>({...prev, ...data}));
+        // console.log(data.items[0])
+        
         const channelsIds = data?.items
           ?.map((item) => item.snippet.channelId)
           .join();
@@ -39,11 +40,12 @@ function useSearchResult() {
             `https://www.googleapis.com/youtube/v3/channels?part=statistics,contentDetails,snippet&id=${channelsIds}&key=${key}`
           ),
         ]);
-        const viewsData = await viewsRes.json();
-        const channelsData = await channelsRes.json();
-
-        setViews(() => viewsData);
-        setChannels(() => channelsData);
+        const [viewsData, channelsData] = await Promise.all([viewsRes.json(), channelsRes.json()])
+        // const viewsData = await viewsRes.json();
+        // const channelsData = await channelsRes.json();
+        console.log(channelsData.items[0])
+        setViews((prev) => ({...prev,...viewsData}));
+        setChannels((prev) => ({...prev,...channelsData}));
       }
       fetchData();
     },
@@ -61,13 +63,15 @@ function useSearchResult() {
       thumb: item.snippet.thumbnails.high.url,
       published: item.snippet.publishedAt,
     }));
-    const allChannelsObject = channels?.items?.map((item) => ({
+    const allChannelsObject = channels?.items?.map((item) => {
+      console.log(item.snippet.thumbnails.default.url)
+      return {
       channelId: item.id,
-      icon: item.snippet.thumbnails.high.url,
+      icon: item.snippet.thumbnails.default.url,
       channelTitle: item.snippet.title,
       customUrl: item.snippet.customUrl,
       subscriberCount: item.statistics.subscriberCount,
-    }));
+    }});
     const allViewsObject = views?.items?.map((item) => ({
       videoId: item.id,
       views: item.statistics.viewCount,
@@ -79,7 +83,7 @@ function useSearchResult() {
         ?.filter((item2) => item2.channelId === item1.channelId)
         .map((item2) => Object.assign({}, item1, item2))
     );
-
+    // console.log(joinVideoChannel)
     const newJoinVideoChannel = joinVideoChannel
       ?.map((item) => item?.[0])
       .filter(Boolean);
@@ -100,6 +104,7 @@ function useSearchResult() {
           : item1
       )
       .filter((item) => item !== null);
+      
     const result = [...(others || []), ...(newJoinVideoChannelViews || [])];
 
     return result;
@@ -130,7 +135,7 @@ function useSearchResult() {
   }
 
   const result = joinObjectsVideos();
-  console.log(channels)
+  // console.log(channels)
   return result;
 }
 export { useSearchResult };

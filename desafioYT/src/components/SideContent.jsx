@@ -5,18 +5,19 @@ import SearchResultChannel from './SearchResultChannel'
 
 const SideContent = () => {
   const result = useSearchResult()
-  console.log(result);
+  // console.log(result);
 
   return (
     <>
       <div className={styles.boxListVideos}>
+        
         <ul className={styles.list}>
           {result.map((item) => (
-            item?.kind === 'video'
+            item?.kind === 'video' && item.duration.length > 0
             ?
             <SearchResultVideo item={item}/>
             :
-            item.kind === 'channel'
+            item?.kind === 'channel'
             ?
             <SearchResultChannel item={item}/>
             :

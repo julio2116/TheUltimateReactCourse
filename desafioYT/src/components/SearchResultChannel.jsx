@@ -1,5 +1,5 @@
 import styles from './SearchResultChannel.module.css'
-import { formatNumbers } from "../ultils/FormatNumbers";
+import { formatNumbers } from "../utils/FormatNumbers";
 
 const SearchResultChannel = ({ item }) => {
     return (

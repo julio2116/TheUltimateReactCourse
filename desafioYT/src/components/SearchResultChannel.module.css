@@ -12,7 +12,7 @@
     max-width: 480px;
     align-content: center;
 }
-.subscribers > span:last-child::before{
+.subscribers > span:first-child::after{
     content: "•";
     margin: 0 4px;
 }

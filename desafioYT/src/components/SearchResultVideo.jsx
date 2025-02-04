@@ -1,5 +1,5 @@
-import { handlePublishedTime, newContent } from "../ultils/publishedTime";
-import { formatNumbers } from "../ultils/FormatNumbers";
+import { handlePublishedTime, newContent } from "../utils/publishedTime";
+import { formatNumbers } from "../utils/FormatNumbers";
 import { useNavigate } from "react-router";
 import styles from './SearchResultVideo.module.css';
 
@@ -41,12 +41,12 @@ const SearchResultVideo = ({item}) => {
                   {item.description}
                   {
                     <div>
-                      {newContent(item.published) ? (
+                      {true == newContent(item.published) ? (
                         <span className={styles.newVideo}>New</span>
                       ) : item.definition === "hd" ? (
                         <span className={styles.hd}>HD</span>
                       ) : (
-                        ""
+                        null
                       )}
                     </div>
                   }
