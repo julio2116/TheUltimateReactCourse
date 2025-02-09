@@ -6,6 +6,12 @@
     flex-direction: column;
     list-style: none;
 }
+.title{
+    margin-bottom: -3px;
+    margin-top: 15px;
+    padding-left: 16px;
+    font-weight: 400;
+}
 .item{
     padding: 5px 8px;
 }

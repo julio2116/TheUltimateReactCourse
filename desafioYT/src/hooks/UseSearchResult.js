@@ -22,15 +22,13 @@ function useSearchResult() {
           `https://www.googleapis.com/youtube/v3/search?key=${key}&part=snippet&q=${termSearched}&maxResults=50`
         );
         const data = await res.json();
-        setSearchResult((prev)=>({...prev, ...data}));
-        // console.log(data.items[0])
-        
+        setSearchResult((prev) => ({ ...prev, ...data }));
+        console.log(data)
+
         const channelsIds = data?.items
           ?.map((item) => item.snippet.channelId)
           .join();
-        const viewsIds = data?.items
-          ?.map((item) => item.id.videoId)
-          .join();
+        const viewsIds = data?.items?.map((item) => item.id.videoId).join();
 
         const [viewsRes, channelsRes] = await Promise.all([
           fetch(
@@ -40,12 +38,12 @@ function useSearchResult() {
             `https://www.googleapis.com/youtube/v3/channels?part=statistics,contentDetails,snippet&id=${channelsIds}&key=${key}`
           ),
         ]);
-        const [viewsData, channelsData] = await Promise.all([viewsRes.json(), channelsRes.json()])
-        // const viewsData = await viewsRes.json();
-        // const channelsData = await channelsRes.json();
-        console.log(channelsData.items[0])
-        setViews((prev) => ({...prev,...viewsData}));
-        setChannels((prev) => ({...prev,...channelsData}));
+        const [viewsData, channelsData] = await Promise.all([
+          viewsRes.json(),
+          channelsRes.json(),
+        ]);
+        setViews((prev) => ({ ...prev, ...viewsData }));
+        setChannels((prev) => ({ ...prev, ...channelsData }));
       }
       fetchData();
     },
@@ -63,21 +61,21 @@ function useSearchResult() {
       thumb: item.snippet.thumbnails.high.url,
       published: item.snippet.publishedAt,
     }));
-    const allChannelsObject = channels?.items?.map((item) => {
-      console.log(item.snippet.thumbnails.default.url)
-      return {
-      channelId: item.id,
-      icon: item.snippet.thumbnails.default.url,
-      channelTitle: item.snippet.title,
-      customUrl: item.snippet.customUrl,
-      subscriberCount: item.statistics.subscriberCount,
-    }});
+    const allChannelsObject = channels?.items?.map((item) => ({
+        channelId: item.id,
+        icon: item.snippet.thumbnails.default.url,
+        channelTitle: item.snippet.title,
+        customUrl: item.snippet.customUrl,
+        subscriberCount: item.statistics.subscriberCount,
+      })
+    );
     const allViewsObject = views?.items?.map((item) => ({
       videoId: item.id,
       views: item.statistics.viewCount,
       definition: item.contentDetails.definition,
       duration: formatTime(item.contentDetails.duration),
     }));
+    
     const joinVideoChannel = allSearchResultsObjects?.map((item1) =>
       allChannelsObject
         ?.filter((item2) => item2.channelId === item1.channelId)
@@ -104,7 +102,7 @@ function useSearchResult() {
           : item1
       )
       .filter((item) => item !== null);
-      
+
     const result = [...(others || []), ...(newJoinVideoChannelViews || [])];
 
     return result;
