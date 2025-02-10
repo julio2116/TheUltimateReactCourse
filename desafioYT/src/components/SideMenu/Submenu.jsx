@@ -7,9 +7,9 @@ const Submenu = ({ items }) => {
       {items[0].header && <h3 className={styles.title}>{items[0].header}</h3>}
       <ul className={styles.lista}>
         {items.map(
-          (item, index) =>
+          (item) =>
             item.icon && (
-              <li className={styles.item} key={index}>
+              <li className={styles.item} key={item.title}>
                 <Link to={item.link}>
                   <img src={item.icon} alt="" />
                   <p>{item.title}</p>

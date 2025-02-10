@@ -1,5 +1,5 @@
-import SideContent from "../components/SideContent";
-import SideMenu from "../components/SideMenu";
+import SideContent from "../components/Main/SideContent";
+import SideMenu from "../components/SideMenu/SideMenu";
 
 const SearchPage = () => {
     return (

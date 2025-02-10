@@ -1,5 +1,5 @@
-import RecomendedVideosList from "../components/RecomendedVideosList"
-import VideoPlayer from "../components/VideoPlayer"
+import RecomendedVideosList from "../components/VideoPage/RecomendedVideosList"
+import VideoPlayer from "../components/VideoPage/VideoPlayer"
 
 const VideoPage = () => {
     return (

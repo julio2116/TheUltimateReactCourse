@@ -40,11 +40,13 @@ const items = [
 const SideMenu = () => {
   return (
     <>
-      <nav className={styles.sideMenu}>
-        {items.map((item) => (
-          <Submenu items={item} key={item[0].title} />
-        ))}
-      </nav>
+      <aside>
+        <nav className={styles.sideMenu}>
+          {items.map((item) => (
+            <Submenu items={item} key={item[0].title} />
+          ))}
+        </nav>
+      </aside>
     </>
   );
 };

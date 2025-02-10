@@ -5,7 +5,7 @@
     background-color: black;
     overflow: hidden;
     object-fit: fill;
-    height: 272px;
+    height: 270px;
     width: 50%;
     max-width: 480px;
     justify-content: center;
@@ -16,7 +16,6 @@
 .thumb > img{
     height: 100%;
     cursor: pointer;
-    object-fit: cover;
 }
 .video{
     display: flex;

@@ -8,25 +8,24 @@ const VideoPlayer = ({ children }) => {
   const [played, setPlayed] = useState();
   const videoId = id.get("v");
   const video = `https://www.youtube.com/watch?v=${videoId}`;
-  const width = "51%";
-  const height = "75%";
+  const width = "100%";
+  const height = "100%";
 
   return (
     <>
-      <div
-        className={styles.videoBox}
-        style={{ marginTop: "80px", borderRadius: "15px" }}
-      >
-        <ReactPlayer
-          url={video}
-          playing={true}
-          width={width}
-          height={height}
-          controls={true}
-          onProgress={(progress) => {
-            setPlayed(progress.playedSeconds);
-          }}
-        />
+      <div className={styles.videoBox}>
+        <div className={styles.teste} >
+          <ReactPlayer
+            url={video}
+            playing={true}
+            width={width}
+            height={height}
+            controls={true}
+            onProgress={(progress) => {
+              setPlayed(progress.playedSeconds);
+            }}
+          />
+        </div>
         {children}
       </div>
     </>

@@ -23,7 +23,6 @@ function useSearchResult() {
         );
         const data = await res.json();
         setSearchResult((prev) => ({ ...prev, ...data }));
-        console.log(data)
 
         const channelsIds = data?.items
           ?.map((item) => item.snippet.channelId)
@@ -62,12 +61,12 @@ function useSearchResult() {
       published: item.snippet.publishedAt,
     }));
     const allChannelsObject = channels?.items?.map((item) => ({
-        channelId: item.id,
-        icon: item.snippet.thumbnails.default.url,
-        channelTitle: item.snippet.title,
-        customUrl: item.snippet.customUrl,
-        subscriberCount: item.statistics.subscriberCount,
-      })
+      channelId: item.id,
+      icon: item.snippet.thumbnails.default.url,
+      channelTitle: item.snippet.title,
+      customUrl: item.snippet.customUrl,
+      subscriberCount: item.statistics.subscriberCount,
+    })
     );
     const allViewsObject = views?.items?.map((item) => ({
       videoId: item.id,
@@ -75,13 +74,13 @@ function useSearchResult() {
       definition: item.contentDetails.definition,
       duration: formatTime(item.contentDetails.duration),
     }));
-    
+
     const joinVideoChannel = allSearchResultsObjects?.map((item1) =>
       allChannelsObject
         ?.filter((item2) => item2.channelId === item1.channelId)
         .map((item2) => Object.assign({}, item1, item2))
     );
-    // console.log(joinVideoChannel)
+
     const newJoinVideoChannel = joinVideoChannel
       ?.map((item) => item?.[0])
       .filter(Boolean);
@@ -91,6 +90,7 @@ function useSearchResult() {
         ?.filter((item3) => item3.videoId === item1.videoId)
         .map((item3) => Object.assign({}, item1, item3))
     );
+
     const newJoinVideoChannelViews = joinVideoChannelViews
       ?.map((item) => item?.[0])
       .filter(Boolean);
@@ -108,15 +108,12 @@ function useSearchResult() {
     return result;
   }
   function formatTime(duration) {
-    const time = duration.slice(2, -1);
-    let period = "";
-    if (time.includes("M")) {
-      period = time.replace("M", ":");
-    }
-    if (time.includes("H")) {
-      period = period.replace("H", ":");
-    }
+    let period = duration.slice(2, -1);
+
+    period = time.replace("M", ":");
+    period = period.replace("H", ":");
     period = period.split(":");
+
     let result = `${period[0]}:`;
     if (period.length > 1) {
       for (let i = 1; i < period.length; i++) {
@@ -133,7 +130,6 @@ function useSearchResult() {
   }
 
   const result = joinObjectsVideos();
-  // console.log(channels)
   return result;
 }
 export { useSearchResult };

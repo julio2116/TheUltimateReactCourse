@@ -1,5 +1,5 @@
-import SideMenu from "../components/SideMenu";
-import FirstScreen from '../components/FirstScreen';
+import SideMenu from "../components/SideMenu/SideMenu";
+import FirstScreen from '../components/Main/FirstScreen';
 
 const FirstPage = () => {
     return (

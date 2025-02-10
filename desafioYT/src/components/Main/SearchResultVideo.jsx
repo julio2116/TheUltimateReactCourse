@@ -1,5 +1,5 @@
-import { handlePublishedTime, newContent } from "../utils/publishedTime";
-import { formatNumbers } from "../utils/FormatNumbers";
+import { handlePublishedTime, newContent } from "../../utils/publishedTime";
+import { formatNumbers } from "../../utils/FormatNumbers";
 import { useNavigate } from "react-router";
 import styles from "./SearchResultVideo.module.css";
 
